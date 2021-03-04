@@ -1,0 +1,27 @@
+<h2>Followed Users</h2>
+<% if @users.empty? %>
+<span>ユーザーはいません</span>
+<% else %>
+<table class="table table-striped">
+  <tbody>
+    <% @user.follower_user.where.not(id: current_user.id).each do |user| %>
+    <tr>
+      <td>
+        name:<%= user.name %>
+      </td>
+      <td>
+        <p><%= "フォロー数: #{user.follower.count}" %></p>
+      </td>
+      <td>
+        <p><%= "フォロワー数: #{user.followed.count}" %></p>
+      </td>
+      <td>
+        <%= link_to "show", user_path(user) %>
+      </td>
+
+    </tr>
+    <% end %>
+  </tbody>
+  </table>
+  <% end %>
+

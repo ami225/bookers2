@@ -2,8 +2,21 @@
   <div class="row">
     <div class="col-md-3" >
      <%= render 'users/info', user: @user %>
+     <p><%= link_to "フォロー数: #{@user.follower.count}", follower_path(@user.id) %></p>
+     <p><%= link_to "フォロワー数: #{@user.followed.count}", followed_path(@user.id) %></p>
+      <% unless @user == current_user %>
+  <% if current_user.following?(@user) %>
+    <%= link_to 'フォロー外す', unfollow_path(@user.id), method: :post %>
+  <% else %>
+    <%= link_to 'フォローする', follow_path(@user.id), method: :post %>
+  <% end %>
+<% end %>
+
      <%= render 'users/new', book: @book %>
     </div>
+      <div>
+
+  </div>
 <div class="col-md-8 offset-md-1">
 <h2>Books</h2>
 <table class="table table-striped">
@@ -23,6 +36,7 @@
       </td>
     </tr>
     <% end %>
+
     <%= paginate @books %>
   </tbody>
 </table>
