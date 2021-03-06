@@ -28,6 +28,43 @@ class User < ApplicationRecord
   following_user.include?(user)
   end
 
+  def self.looks(searches, words)
+    if searches == "perfect_match"
+      @user = User.where("name LIKE ?", "#{words}")
+    else
+      @user = User.where("name LIKE ?", "%#{words}%")
+    end
+  end
+
+  def self.looks(searches, words)
+    if searches == "partial_match"
+      @user = User.where("name LIKE ?", "#{words}")
+    else
+      @user = User.where("name LIKE ?", "%#{words}%")
+    end
+  end
+
+  def self.looks(searches, words)
+    if searches == "forward_match"
+      @user = User.where("name LIKE ?", "#{words}")
+    else
+      @user = User.where("name LIKE ?", "%#{words}%")
+    end
+  end
+
+  def self.looks(searches, words)
+    if searches == "backward_match"
+      @user = User.where("name LIKE ?", "#{words}")
+    else
+      @user = User.where("name LIKE ?", "%#{words}%")
+    end
+  end
+
+
+
+
+
+
 
 
   validates :name, uniqueness: true
