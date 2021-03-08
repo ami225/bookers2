@@ -23,26 +23,10 @@
         <td>
            Opinion:<%= book.body %>
         </td>
-           <% if book.favorited_by?(current_user) %>
-         <td>
-           <%= link_to book_favorites_path(book), method: :delete do %>
-           ♥<%= book.favorites.count %> いいね
-           <% end %>
-         </td>
-        <% else %>
-         <td>
-          <%= link_to book_favorites_path(book), method: :post do %>
-          ♡<%= book.favorites.count %> いいね
-          <% end %>
-           <% end %>
-          <td>
-         <p>コメント件数：<%= book.book_comments.count %></p>
-        </td>
-        </td>
+        <tb id="favorites_buttons_<%= book.id %>">
+           <%= render partial: 'favorites/favorite', locals: { book:book} %>
+        </tb>
         <% end %>
-
-
-
       </tr>
   </tbody>
   </table>
